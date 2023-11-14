@@ -6,17 +6,32 @@
 
 <div th:replace="~{fragments :: page-header}"></div>
 
-<p th:unless="${employers} and ${employers.size()}">no jobs!</p>
+<p th:unless="${employers} and ${employers.size()}">no employers!</p>
 
 <div class="container body-content">
     <h2>Employers</h2>
-    <ul>
-        <li th:each="employer : ${employers}">
-            <a th:href="@{'/employers/view/' + ${employer.id}}" th:text="${employer.name}"></a>
-        </li>
-    </ul>
-    <a th:href="@{'/employers/add'}">Add Employers</a>
-
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Action</th> <!-- Add this column for actions -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employer : ${employers}">
+            <td th:text="${employer.id}"></td>
+            <td th:text="${employer.name}"></td>
+            <td th:text="${employer.location}"></td>
+            <td>
+                <a th:href="@{'/employers/view/' + ${employer.id}}" th:text="View"></a>
+                <!-- Add additional action links/buttons as needed -->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{'/employers/add'}">Add Employer</a>
 </div>
 
 </body>
